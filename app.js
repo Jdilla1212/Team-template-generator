@@ -52,6 +52,7 @@ function init() {
             }]).then(res => {
                 const manager = new Manager(answers.name, answers.id, answers.email, res.officeNumber);
                 employees.push(manager);
+                addEmployee();
             }) 
         } else if (answers.role === "Engineer") {
             inquirer.prompt([{
@@ -61,6 +62,7 @@ function init() {
             }]).then(res => {
                 const engineer = new Engineer(answers.name, answers.id, answers.email, res.github);
                 employees.push(engineer);
+                addEmployee();
             })
         } else {
             inquirer.prompt([{
@@ -70,11 +72,27 @@ function init() {
             }]).then(res => {
                 const intern = new Intern(answers.name, answers.id, answers.email, res.school);
                 employees.push(intern);
+                addEmployee();
             })
         }
     })
-
 };
+
+function addEmployee() {
+    inquirer.prompt([{
+        type: "confirm",
+        name: "response",
+        message: "Would you like to add another employee?"
+    }]).then(res => {
+        if (res.response === true){
+            init();
+        } else {
+            //call render function? with employee array
+            render(employees);
+            //what to do from here....?
+        }
+    })
+}
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
