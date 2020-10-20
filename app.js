@@ -9,9 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const {
-    type
-} = require("os");
+const { type } = require("os");
 // const Choices = require("inquirer/lib/objects/choices");
 
 const employees = [];
@@ -51,8 +49,8 @@ function init() {
                 type: "input",
                 name: "officeNumber",
                 message: "What is your manager's office number?"
-            }]).then(response => {
-                const manager = new Manager(answers.name, answers.id, answers.email, response.officeNumber);
+            }]).then(res => {
+                const manager = new Manager(answers.name, answers.id, answers.email, res.officeNumber);
                 employees.push(manager);
             }) 
         } else if (answers.role === "Engineer") {
@@ -60,8 +58,8 @@ function init() {
                 type: "input",
                 name: "github",
                 message: "What is your engineer's GitHub url?"
-            }]).then(response => {
-                const engineer = new Engineer(answers.name, answers.id, answers.email, response.github);
+            }]).then(res => {
+                const engineer = new Engineer(answers.name, answers.id, answers.email, res.github);
                 employees.push(engineer);
             })
         } else {
@@ -69,13 +67,12 @@ function init() {
                 type: "input",
                 name: "school",
                 message: "Where does your intern go to school?"
-            }]).then(response => {
-                const intern = new Intern(answers.name, answers.id, answers.email, response.school);
+            }]).then(res => {
+                const intern = new Intern(answers.name, answers.id, answers.email, res.school);
                 employees.push(intern);
             })
         }
     })
-
 
 };
 
