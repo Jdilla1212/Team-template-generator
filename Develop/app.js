@@ -51,19 +51,28 @@ function init() {
                 type: "input",
                 name: "officeNumber",
                 message: "What is your manager's office number?"
-            }])
+            }]).then(response => {
+                const manager = new Manager(answers.name, answers.id, answers.email, response.officeNumber);
+                employees.push(manager);
+            }) 
         } else if (answers.role === "Engineer") {
             inquirer.prompt([{
                 type: "input",
                 name: "github",
                 message: "What is your engineer's GitHub url?"
-            }])
+            }]).then(response => {
+                const engineer = new Engineer(answers.name, answers.id, answers.email, response.github);
+                employees.push(engineer);
+            })
         } else {
             inquirer.prompt([{
                 type: "input",
                 name: "school",
                 message: "Where does your intern go to school?"
-            }])
+            }]).then(response => {
+                const intern = new Intern(answers.name, answers.id, answers.email, response.school);
+                employees.push(intern);
+            })
         }
     })
 
